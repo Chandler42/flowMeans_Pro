@@ -3,12 +3,23 @@ library(flowMeans)
 library(flowCore)
 library(flowPeaks)
 
-debugSource('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/flowMeans.R', encoding = 'UTF-8')
-source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/updateMergedClusters.R')
-source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/MergeLabels.R')
-source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/countModes.R')
-source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/inSameCluster.R')
-source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/distanceMatrix.R')
+
+# source all functions
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/countModes.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/distanceMatrix.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/inSameCluster.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/MergeLabels.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/nextMerge.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/updateMergedClusters.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/flowMeans.R')
+
+
+# debugSource('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/flowMeans.R', encoding = 'UTF-8')
+# source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/updateMergedClusters.R')
+# source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/MergeLabels.R')
+# source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/countModes.R')
+# source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/inSameCluster.R')
+# source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/distanceMatrix.R')
 
 data(x)
 res <- flowMeansPro(x, varNames=c("FL1.H", "FL2.H", "FL3.H", "FL4.H"), MaxN=10)
