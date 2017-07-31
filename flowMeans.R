@@ -57,6 +57,7 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
       }
       
       # standardize to 0 to 1 interval
+      # feature scaling, also called unity-based normalization
       if (Standardize) {
             for (i in 1:length(x[1, ])) {
                   x[, i] <- x[, i] - min(x[, i])
@@ -84,10 +85,18 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
       # Maximum number of clusters. If set to NA (default) the value will be estimated automatically.
       if (is.na(MaxN)) {
             MaxN <- 0
-            for (i in 1:length(x[1, ])) MaxN <- (MaxN + countModes(x[1:MaxKernN,i])$NumberOfModes) 
-            # countModes: number of modes in one dimension. (not eigenvector of the data?
+            # project x onto PCA
+            z <- prcomp(x)
+            PCA <- z$rotation[,1]
+            y <- x %*% PCA
+           
+            MaxN <- (MaxN + countModes(y[1:MaxKernN])$NumberOfModes) * length(x[1,])
             
+            # countModes: number of modes in one dimension. (not eigenvector of the data?
+                 
             MaxN <- max(MaxN, 3)
+            #concatenate and print
+            # cat("MaxN=",MaxN)
       }
       
       # Number of clusters. If set to NA (default) the value will be estimated automatically.

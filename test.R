@@ -52,3 +52,6 @@ plot(ft$MinIndex+1, res@Mins[ft$MinIndex+1], col='red', xlab='Iteration', ylab='
 # can be used to visualize this:
 plot(x, res, c("FL1.H", "FL2.H"))
 plot(x, res, c("FL1.H", "FL2.H","FL3.H", "FL4.H"),pch='.')
+
+
+
