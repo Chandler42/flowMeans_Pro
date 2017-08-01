@@ -3,6 +3,9 @@ library(flowPeaks)
 library(scatterplot3d)
 library(rgl)
 
+scatterplot3d(x = syn_data$V1,y=syn_data$V2,z=syn_data$V3, 
+              color = syn_data$V4, main = "flowMeansPro")
+
 # flowMeansPro use default MaxN
 ptm <- proc.time()
 fp <- flowMeansPro(syn_data, c("V1", "V2", "V3"), 
@@ -13,7 +16,7 @@ time_flowMeansPro
 scoreMeansPro <- evalCluster(syn_data$V4, fp@Labels[[fp@MinIndex+1]], method = "Fmeasure")
 scoreMeansPro
 scatterplot3d(x = syn_data$V1,y=syn_data$V2,z=syn_data$V3, 
-              color = fp@Labels[[fp@MinIndex+15]], main = "flowMeansPro")
+              color = fp@Labels[[fp@MinIndex+1]], main = "flowMeansPro")
 
 #flowMeans
 ptm <- proc.time()
@@ -22,6 +25,7 @@ fp <- flowMeans(syn_data, c("V1", "V2", "V3"),
                    Standardize = TRUE, addNoise = FALSE)
 time_flowMeans <- proc.time()-ptm
 time_flowMeans
+fp@MaxN
 #  The MinIndex value indicates the index of the change point
 scoreMeans <- evalCluster(syn_data$V4, fp@Labels[[fp@MinIndex+1]], method = "Fmeasure")
 scoreMeans

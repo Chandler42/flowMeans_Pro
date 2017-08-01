@@ -23,3 +23,23 @@ for (i in 2:length(y$curv)) {
 }
 count
 plot(y, addKDE = TRUE, addSignifCurvRegion = TRUE)
+
+
+# another method
+plot(density(z))
+
+find_modes<- function(x) {
+      modes <- 0
+      for ( i in 2:(length(x)-1) ){
+            if ( (x[i] > x[i-1]) & (x[i] > x[i+1]) ) {
+                  modes <- modes + 1
+            }
+      }
+      
+      return(modes)
+}
+
+modeNumbers <- find_modes(density(z)$y)
+modeNumbers
+
+countModes(z)

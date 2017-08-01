@@ -73,5 +73,6 @@ time_flowMeansPro
 #  The MinIndex value indicates the index of the change point
 scoreMeansPro <- evalCluster(barcode$barcode.cid, fp@Labels[[fp@MinIndex+1]], method = "Fmeasure")
 scoreMeansPro
+fp@MaxN
 scatterplot3d(x = barcode$Pacific.blue,y=barcode$Alexa,z=barcode$APC, 
               color = fp@Labels[[fp@MinIndex+1]], main = "flowMeansPro")
