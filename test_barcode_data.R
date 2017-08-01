@@ -25,7 +25,7 @@ scatterplot3d(x = barcode$Pacific.blue,y=barcode$Alexa,z=barcode$APC,
 #flowMeans
 ptm <- proc.time()
 # Standardize = FALSE performs much better 
-fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = 30,
+fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = NA,
 Standardize = FALSE, addNoise = FALSE)
 # fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = 30,
 #                 Standardize = TRUE, addNoise = FALSE )
@@ -67,7 +67,7 @@ scatterplot3d(x = barcode$Pacific.blue,y=barcode$Alexa,z=barcode$APC,
 # flowMeansPro use default MaxN
 ptm <- proc.time()
 fp <- flowMeansPro(barcode, c("Pacific.blue", "Alexa", "APC"), 
-                   Standardize = FALSE, addNoise = FALSE)
+                   Standardize = TRUE, addNoise = FALSE)
 time_flowMeansPro <- proc.time()-ptm
 time_flowMeansPro
 #  The MinIndex value indicates the index of the change point

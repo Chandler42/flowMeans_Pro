@@ -87,13 +87,14 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
             MaxN <- 0
             # project x onto PCA
             z <- prcomp(x)
-            PCA <- z$rotation[,1]
+            PCA <- z$rotation
             y <- x %*% PCA
-           
-            MaxN <- (MaxN + countModes(y[1:MaxKernN])$NumberOfModes) * length(x[1,])
+           for (i in 1:length(x[1,])){
+            MaxN <- (MaxN + countModes(y[1:MaxKernN, i])$NumberOfModes) 
             
             # countModes: number of modes in one dimension. (not eigenvector of the data?
-                 
+           }
+            MaxN <- MaxN*2
             MaxN <- max(MaxN, 3)
             #concatenate and print
             # cat("MaxN=",MaxN)
