@@ -85,11 +85,13 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
       # Maximum number of clusters. If set to NA (default) the value will be estimated automatically.
       if (is.na(MaxN)) {
             MaxN <- 0
-            # project x onto eigenvectors
-            z <- prcomp(x)
-            PCA <- z$rotation
-            y <- x %*% PCA
-            # y <- x
+            # # project x onto eigenvectors
+            # z <- prcomp(x)
+            # PCA <- z$rotation
+            # y <- x %*% PCA
+            
+            # don't project 
+            y <- x
            for (i in 1:length(y[1,])){
             MaxN <- (MaxN + countModes(y[1:MaxKernN, i])$NumberOfModes) 
             
