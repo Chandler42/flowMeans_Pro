@@ -12,6 +12,7 @@ source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/MergeLabels.R')
 source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/nextMerge.R')
 source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/updateMergedClusters.R')
 source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/flowMeans.R')
+source('~/SOTON/Summer Project/R_workspace/flowMeans_Pro_1.0/MergeMatrix.R')
 
 
 # debugSource('~/SOTON/Summer Project/R_workspace/flowMeans_Pro/flowMeans.R', encoding = 'UTF-8')

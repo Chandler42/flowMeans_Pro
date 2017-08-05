@@ -114,18 +114,27 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
       # cluster: A vector of integers (from 1:k) indicating the cluster to which each point is allocated.
       Label <- km$cluster
       
-      
-      mat <- distanceMatrix(x, Label, Mahalanobis, MaxCovN)
+      dimensionality <- length(x[1,])
+      dM <- distanceMatrix(x, Label, Mahalanobis, MaxCovN)
+      mat <- dM$mat
+      covMatrixList <- dM$covMatrixList
       Max <- max(mat)
       Mins <- vector() #vector(mode = "logical", length = 0)
       Mats <- list()	# list of mats
       Labels <- list() # list of Labels
       N <- max(Label) # number of clusters
+      means <- matrix(0,N,dimensionality) # colmeans of every cluster
+      quantity <- vector() # number of points of each cluster
       
       Mats[[1]] <- mat
       Labels[[1]] <- Label
       MergedClusters <- list() # list of number of merged clusters
       ListOfLabels <- c(1:MaxN) # vector of labels
+      for(i in 1:N){
+            means[i,] <- colMeans(x[which(Label == i),])
+            quantity[i] <- length(x[which(Label == i),1])
+                  
+      }
       
       # merge clusters until all in one
       for (i in 1:MaxN) MergedClusters[[i]] <- c(i) #initialization 
@@ -136,6 +145,7 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
                         Min = min(mat)
                         break
                   }
+            # the biggest distance * 2
             Min <- Max * 2
             I <- 0
             J <- 0
@@ -151,6 +161,9 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
                   J <- ListOfLabels[TJ]
             }
             else {
+                  # means and number of points of each cluster
+                  
+                  
                   for (i in 1:N) {
                         for (j in 1:i) {
                               if (i == j) 
@@ -174,10 +187,17 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
                   ListOfLabels <- temp$ListOfLabels
                   # N: how many clusters are left.
                   N <- max(Label)
+                  updateI <- min(TI,TJ)
+                  updateJ <- max(TI,TJ)
+                  updateMax <- N+1
                   # update the distance matrix
                   if (Update == "Mahalanobis") 
                         # may do software optimization here 
-                        mat = distanceMatrix(x, Label, Mahalanobis, MaxCovN)
+                        updateDistance <-updateDistanceMatrix(mat,covMatrixList, Label, Mahalanobis, MaxCovN, updateI, updateJ, updateMax,means,quantity)
+                        mat = updateDistance$mat
+                        covMatrixList <- updateDistance$covMatrixList
+                        means <- updateDistance$means
+                        quantity <- updateDistance$quantity
                   
                   if (Update == "Mean") 
                         mat = MergeMatrix(mat, I, J)

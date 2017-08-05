@@ -2,6 +2,7 @@
 # MaxCovN: Maximum number of points, used for calculating the covariance.
 distanceMatrix <- function (x, Label, Mahalanobis, MaxCovN) 
 {
+      covMatrixList <- list()
       n <- max(Label)
       mat = matrix(0, n, n)
       for (i in 1:n) {
@@ -12,7 +13,9 @@ distanceMatrix <- function (x, Label, Mahalanobis, MaxCovN)
                         if (Mahalanobis) {
                               MaxCovNumber <- min(MaxCovN, length(Li[, 1])) # Maximum number of points, used for calculating the covariance
                               # mahalanobis distance from centre of Lj to Li (? why use covariance of Li, should be Lj)
-                              mat[i, j] = mean(mahalanobis(Li, colMeans(Lj), cov(Li[1:MaxCovNumber, ])))  
+                              covMatrixI <- cov(Li)
+                              covMatrixList[[i]] <- covMatrixI
+                              mat[i, j] = mean(mahalanobis(Li, colMeans(Lj), covMatrixI))  
                         }
                         else mat[i, j] = sqrt(sum(colMeans(Li) - colMeans(Lj))^2) # euclidean distance
                   }
@@ -29,5 +32,5 @@ distanceMatrix <- function (x, Label, Mahalanobis, MaxCovN)
                   }
             }
       }
-      return(mat)
+      return(list(mat = mat, covMatrixList = covMatrixList))
 }
