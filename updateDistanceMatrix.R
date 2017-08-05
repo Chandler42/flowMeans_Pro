@@ -1,6 +1,6 @@
 # distanceMatrix: the distances between each clusters
 # MaxCovN: Maximum number of points, used for calculating the covariance.
-updateDistanceMatrix <- function (mat, covMatrixList, Label, Mahalanobis, MaxCovN, updateI, updateJ, updateMax, means, quantity) 
+updateDistanceMatrix <- function (x, mat, covMatrixList, Label, Mahalanobis, MaxCovN, updateI, updateJ, updateMax, means, quantity) 
 {
       n <- max(Label)
       oldMat <- mat

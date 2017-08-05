@@ -193,7 +193,7 @@ flowMeansPro <- function (x, varNames = NULL, MaxN = NA, NumC = NA, iter.max = 5
                   # update the distance matrix
                   if (Update == "Mahalanobis") 
                         # may do software optimization here 
-                        updateDistance <-updateDistanceMatrix(mat,covMatrixList, Label, Mahalanobis, MaxCovN, updateI, updateJ, updateMax,means,quantity)
+                        updateDistance <-updateDistanceMatrix(x, mat,covMatrixList, Label, Mahalanobis, MaxCovN, updateI, updateJ, updateMax,means,quantity)
                         mat = updateDistance$mat
                         covMatrixList <- updateDistance$covMatrixList
                         means <- updateDistance$means
