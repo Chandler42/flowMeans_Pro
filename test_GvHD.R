@@ -15,11 +15,13 @@ GvHD <- GvHD[[20]]
 GvHD <- GvHD@exprs
 # [, c("FL1-H", "FL2-H", "FL3-H", "FL4-H", "Time")]
 
+# read fcs data
+sample <- read.FCS("001.fcs")
 
 
-plot(barcode, col=barcode.cid)
-barcode <- cbind(barcode, barcode.cid)
-barcode <- subset(barcode, barcode.cid > 0)
+res <- flowMeans(x, c("FL1.H", "FL2.H", "FL3.H", "FL4.H"), MaxN=10)
+plot(x[,c(3,4)], res, c("FL1.H", "FL2.H"))
+
 # plot3d(barcode$Pacific.blue, barcode$Alexa, barcode$APC, col=barcode$barcode.cid, size=3)
 scatterplot3d(x = barcode$Pacific.blue,y=barcode$Alexa,z=barcode$APC, 
               color = barcode$barcode.cid, main = "Barcode data")

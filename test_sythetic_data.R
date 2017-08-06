@@ -9,7 +9,7 @@ scatterplot3d(x = syn_data$V1,y=syn_data$V2,z=syn_data$V3,
 # flowMeansPro use default MaxN
 ptm <- proc.time()
 fp <- flowMeansPro(syn_data, c("V1", "V2", "V3"), 
-                   Standardize = TRUE, addNoise = FALSE, MaxN = 3)
+                   Standardize = TRUE, addNoise = FALSE, MaxN = 5)
 time_flowMeansPro <- proc.time()-ptm
 time_flowMeansPro
 #  The MinIndex value indicates the index of the change point
@@ -22,7 +22,7 @@ scatterplot3d(x = syn_data$V1,y=syn_data$V2,z=syn_data$V3,
 ptm <- proc.time()
 ptm <- proc.time()
 fp <- flowMeans(syn_data, c("V1", "V2", "V3"), 
-                   Standardize = TRUE, addNoise = FALSE)
+                   Standardize = TRUE, addNoise = FALSE, MaxN = 5)
 time_flowMeans <- proc.time()-ptm
 time_flowMeans
 fp@MaxN

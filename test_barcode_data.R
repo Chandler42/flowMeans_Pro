@@ -25,10 +25,10 @@ scatterplot3d(x = barcode$Pacific.blue,y=barcode$Alexa,z=barcode$APC,
 #flowMeans
 ptm <- proc.time()
 # Standardize = FALSE performs much better 
-fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = NA,
-Standardize = FALSE, addNoise = FALSE)
-# fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = 30,
-#                 Standardize = TRUE, addNoise = FALSE )
+# fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = NA,
+# Standardize = FALSE, addNoise = FALSE)
+fp <- flowMeans(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = 30,
+                Standardize = FALSE, addNoise = FALSE )
 
 time_flowMeans <- proc.time()-ptm
 time_flowMeans
@@ -50,7 +50,7 @@ scatterplot3d(x = barcode$Pacific.blue,y=barcode$Alexa,z=barcode$APC,
 
 ## flowMeansPro
 ptm <- proc.time()
-fp <- flowMeansPro(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = 40, 
+fp <- flowMeansPro(barcode, c("Pacific.blue", "Alexa", "APC"), MaxN = 30, 
                    Standardize = FALSE, addNoise = FALSE)
 time_flowMeansPro <- proc.time()-ptm
 time_flowMeansPro
